@@ -1,0 +1,50 @@
+/* styles.css - colours live in variables so Low-stimulation mode can swap them in one place */
+:root {
+  --bg: #eef1f4; --card: #ffffff; --ink: #1f2a37; --muted: #56677a;
+  --primary: #3f5668;        /* one muted blue-grey (design rule) */
+  --line: #9aa9b8; --occupied: #d9dee3;
+  --warn: #9a4a12;           /* colour only for status */
+  --seat: 52px;              /* seat size; zoom changes this */
+}
+body.low-stim { --bg: #f3f2ef; --primary: #5b6b78; --line: #b3bcc4; }
+body.low-stim * { transition: none !important; animation: none !important; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.4; }
+.app { max-width: 720px; margin: 0 auto; padding: 16px; }
+h1 { font-size: 1.4rem; margin: 0; } .sub { color: var(--muted); margin: 4px 0 12px; }
+
+.key, .controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-bottom: 12px; }
+.key { background: var(--card); padding: 10px 12px; border-radius: 6px; border: 1px solid var(--line); }
+.key-item { display: inline-flex; align-items: center; gap: 8px; font-size: .95rem; }
+.swatch { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; }
+
+/* Each seat state has its OWN SHAPE/MARK, not just colour */
+.s-available, .seat.available { background: var(--card); border: 2px solid var(--primary); color: var(--primary); }
+.s-occupied,  .seat.occupied  { background: var(--occupied); border: 2px solid var(--line); color: var(--muted); }
+.s-selected,  .seat.selected  { background: var(--card); border: 3px dashed var(--primary); }
+
+.toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+.toggle input { width: 22px; height: 22px; accent-color: var(--primary); }
+.zoom button { min-width: 44px; min-height: 44px; font-size: 1.3rem; border-radius: 6px;
+               border: 1px solid var(--primary); background: var(--card); color: var(--primary); cursor: pointer; }
+
+.map-wrap { overflow: auto; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 12px; max-height: 60vh; }
+.map { display: grid; grid-template-columns: repeat(6, var(--seat)); gap: 8px; width: max-content; margin: 0 auto; }
+.seat { width: var(--seat); height: var(--seat); min-width: 44px; min-height: 44px; border-radius: 6px;
+        font: inherit; font-size: .8rem; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.seat:disabled { cursor: not-allowed; }
+.seat.dim { opacity: .35; }                 /* seats hidden by the Quiet filter */
+.mark { font-size: 1.1rem; line-height: 1; }
+
+.details { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px; margin-top: 12px; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 10px 0; }
+.badge { border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; font-size: .95rem; }
+.badge b { font-weight: 600; }
+.primary { width: 100%; min-height: 48px; border: 0; border-radius: 6px; background: var(--primary);
+           color: #fff; font: inherit; font-weight: 600; cursor: pointer; margin-top: 8px; }
+.confirm { color: var(--primary); font-weight: 600; }
+
+:focus-visible { outline: 3px solid var(--warn); outline-offset: 2px; }   /* visible keyboard focus */
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

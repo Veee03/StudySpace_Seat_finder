@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudySpace - Floor map</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>Library, Floor 2</h1>
+      <p class="sub">Seat data updated <span id="updated"></span></p>
+    </header>
+
+    <!-- KEY: placed ABOVE the map (Think-Aloud fix: key was hard to find) -->
+    <section class="key" aria-label="Map key">
+      <span class="key-item"><span class="swatch s-available" aria-hidden="true">&#10003;</span> Available</span>
+      <span class="key-item"><span class="swatch s-occupied" aria-hidden="true">/</span> Taken</span>
+      <span class="key-item"><span class="swatch s-selected" aria-hidden="true"></span> Your pick</span>
+    </section>
+
+    <section class="controls" aria-label="Map controls">
+      <label class="toggle"><input type="checkbox" id="quietOnly"> <span>Quiet seats only</span></label>
+      <div class="zoom" role="group" aria-label="Zoom">
+        <button id="zoomOut" aria-label="Zoom out">&minus;</button>
+        <button id="zoomIn" aria-label="Zoom in">+</button>
+      </div>
+      <label class="toggle"><input type="checkbox" id="lowStim"> <span>Low-stimulation mode</span></label>
+    </section>
+
+    <div class="map-wrap"><div id="map" class="map" role="list"></div></div>
+
+    <!-- Details panel is filled in by app.js when a seat is picked -->
+    <section id="details" class="details" aria-live="polite">
+      <p class="hint">Select a seat to see its details.</p>
+    </section>
+  </main>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
